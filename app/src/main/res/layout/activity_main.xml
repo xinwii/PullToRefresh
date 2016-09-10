@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <com.pulltorefresh.app.MoveImageView
+            android:id="@+id/iv_pull_to_refresh_bg"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="center" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/bg_pull_to_refresh_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/bg_pull_to_refresh_right" />
+
+        <ImageView
+            android:id="@+id/iv_pull_to_refresh_anim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/pull_to_refresh_anim"
+            android:scaleType="center" />
+    </RelativeLayout>
+</RelativeLayout>
