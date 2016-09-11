@@ -9,20 +9,19 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.ImageView;
 
 /**
  * Created by ddsc on 9/9/2016.
  */
 public class MoveImageView extends ImageView {
-    private final String TAG = "MoveImageView";
     private Context mContext;
-    private float ratio;
+    private float mRatio;
     // shader containing repeated waves
-    private BitmapShader bitmapShader;
-    private Paint paint;
-    private Matrix matrix;
+    private BitmapShader mBitmapShader;
+    private Paint mPaint;
+    private Matrix mMatrix;
+    private int mBitmapWidth = 0;//背景图片宽度
 
     public MoveImageView(Context context) {
         super(context);
@@ -40,43 +39,44 @@ public class MoveImageView extends ImageView {
     }
 
     public void setRatio(float ratio) {
-        this.ratio = ratio;
+        mRatio = ratio;
         invalidate();
     }
 
     public float getRatio() {
-        return ratio;
+        return mRatio;
     }
 
     private void init(Context context) {
         mContext = context;
-        matrix = new Matrix();
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setShader(bitmapShader);
+        mMatrix = new Matrix();
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setShader(mBitmapShader);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.bg_pull_to_refresh);
-        bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
+        mBitmapWidth = bitmap.getWidth();
+        mBitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.CLAMP);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.d(TAG, "onDraw: " + ratio);
-        if (bitmapShader != null) {
-            if (paint.getShader() == null) {
-                paint.setShader(bitmapShader);
+        if (mBitmapShader != null) {
+            if (mPaint.getShader() == null) {
+                mPaint.setShader(mBitmapShader);
             }
-           matrix.setScale(1f, 1f, 0, getHeight()/2);
-            matrix.postTranslate(getWidth() * ratio, 0);
-            bitmapShader.setLocalMatrix(matrix);
+            //循环平移
+            mMatrix.setScale(1f, 1f, 0, 0);
+            mMatrix.postTranslate(mBitmapWidth * mRatio, 0);
+            mBitmapShader.setLocalMatrix(mMatrix);
             canvas.drawRect(0, 0, getWidth(),
-                    getHeight(), paint);
+                    getHeight(), mPaint);
         } else {
-            paint.setShader(null);
+            mPaint.setShader(null);
         }
     }
 }

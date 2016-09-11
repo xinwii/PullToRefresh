@@ -24,7 +24,7 @@ public class MoveImageHelper {
         anim = ObjectAnimator.ofFloat(
                 moveImageView, "ratio", 1f, 0f);
         anim.setRepeatCount(ValueAnimator.INFINITE);
-        anim.setDuration(3000);
+        anim.setDuration(5000);
         anim.setInterpolator(new LinearInterpolator());
 
     }
