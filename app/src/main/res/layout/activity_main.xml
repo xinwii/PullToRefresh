@@ -18,14 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:scaleType="center"
-            android:src="@drawable/bg_pull_to_refresh_left" />
+            android:src="@mipmap/bg_pull_to_refresh_left" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:scaleType="center"
-            android:src="@drawable/bg_pull_to_refresh_right" />
+            android:src="@mipmap/bg_pull_to_refresh_right" />
 
         <ImageView
             android:id="@+id/iv_pull_to_refresh_anim"
